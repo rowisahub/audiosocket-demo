@@ -32,13 +32,13 @@ class State(object):
         self.vapi_connected = False
 
     def buffer(self, data):
-        print 'buffering:', len(data)
+        print('buffering:', len(data))
         if self.count == 0:
-            print 'initial batch'
+            print('initial batch')
             self.payload = WAV_HEADER + data
             self.count += 1
         elif self.count == 9:
-            print 'broadcasting'
+            print('broadcasting')
             self.payload += data
             self.broadcast(self.payload)
             self.count = 0
