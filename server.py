@@ -206,7 +206,7 @@ if CONFIG.fully_configured:
     # The Server Config
     static_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                'static/')
-    print static_path
+    print(static_path)
     application = tornado.web.Application([
         (r"/", MainHandler),
         (r"/event", EventHandler),
