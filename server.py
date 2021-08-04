@@ -53,7 +53,7 @@ class State(object):
             conn.write_message(payload, binary=True)
 
     def broadcast_event(self, event):
-        print "Sending Event {}".format(event)
+        print("Sending Event {}").format(event)
         for conn in self.eventclients:
             conn.write_message(event)
 
@@ -62,11 +62,11 @@ class State(object):
         if event['direction'] == "outbound" and event['status'] == "answered":
             logging.debug("Setting call UUID to: %s", event['uuid'])
             self.vapi_call_uuid = event['uuid']
-            print "VAPI CALL ID SET AS {}".format(self.vapi_call_uuid)
+            print("VAPI CALL ID SET AS {}").format(self.vapi_call_uuid)
         return True
 
     def check_clients(self):
-        print "VAPI Connected: " + str(self.vapi_connected)
+        print("VAPI Connected: " + str(self.vapi_connected))
         logging.debug("Clients: %s, Connected: %s", self.clients, self.vapi_connected)
         if len(self.clients) == 1 and not self.vapi_connected:
             self.connect_vapi()
@@ -115,7 +115,7 @@ class EnvErrorsHandler(tornado.web.RequestHandler):
 class EventHandler(tornado.web.RequestHandler):
     def post(self):
         event = json.loads(self.request.body)
-        print "EVENT RECEIVED {}".format(json.dumps(event))
+        print("EVENT RECEIVED {}").format(json.dumps(event))
         state.process_event(event)
         state.broadcast_event(event)
         self.set_status(204)
